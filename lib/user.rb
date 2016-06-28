@@ -3,6 +3,8 @@ class User
   attr_reader :balance, :history
 
   INITIAL_BALANCE = 0
+  STATEMENT_HEADER = "date || credit || debit || balance\n"
+
 
   def initialize
     @balance = INITIAL_BALANCE
@@ -22,7 +24,7 @@ class User
   end
 
   def print_statement
-    head = "date || credit || debit || balance \n"
+    head = "date || credit || debit || balance\n"
     string = ''
     @history.each do |transaction|
       if transaction[:amount] < 0
@@ -32,9 +34,9 @@ class User
         pre_pipes = ' || '
         post_pipes = ' || || '
       end
-      string + ("#{transaction[:date]}" + pre_pipes + "#{transaction[:amount].abs}" + post_pipes + "#{transaction[:balance]}\n")
+      string += "#{transaction[:date]}" + pre_pipes + "#{transaction[:amount].abs}" + post_pipes + "#{transaction[:balance]}\n"
     end
-    return (head + string)
+    return (head + string).chomp
   end
 
   private
