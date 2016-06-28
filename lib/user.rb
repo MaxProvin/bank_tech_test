@@ -12,19 +12,16 @@ class User
   end
 
   def deposit(sum)
-    transaction = Transaction.new
-    transaction.deposit(sum)
+    transaction = Transaction.new(sum)
     update_account(transaction)
   end
 
   def withdraw(sum)
-    transaction = Transaction.new
-    transaction.withdraw(sum)
+    transaction = Transaction.new(-sum)
     update_account(transaction)
   end
 
   def print_statement
-    head = "date || credit || debit || balance\n"
     string = ''
     @history.each do |transaction|
       if transaction[:amount] < 0
@@ -36,14 +33,14 @@ class User
       end
       string += "#{transaction[:date]}" + pre_pipes + "#{transaction[:amount].abs}" + post_pipes + "#{transaction[:balance]}\n"
     end
-    return (head + string).chomp
+    return (STATEMENT_HEADER + string).chomp
   end
 
   private
 
   def update_account(transaction)
-    @balance += transaction.value
-    @history.push({date: transaction.date, amount: transaction.value, balance: @balance})
+    @balance += transaction.amount
+    @history.push({date: transaction.date, amount: transaction.amount, balance: @balance})
   end
 
 end

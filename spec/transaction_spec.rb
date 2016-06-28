@@ -2,34 +2,14 @@ require 'transaction'
 
 describe Transaction do
 
-  subject(:transaction){described_class.new}
+  subject(:transaction){described_class.new(1000)}
 
-  describe 'Deposit' do
-    before do
-      transaction.deposit(1000)
-    end
-
-    it 'user should be able to make a deposit' do
-      expect(transaction.value).to eq(1000)
-    end
-
-    it 'should log the date of the deposit' do
-      expect(transaction.date).to eq(Time.now.strftime("%d/%m/%Y"))
-    end
+  it 'should be created with current date' do
+    expect(transaction.date).to eq(Time.now.strftime("%d/%m/%Y"))
   end
 
-  describe 'Withdrawal' do
-    before do
-      transaction.withdraw(250)
-    end
-
-    it 'user should be able to make a deposit' do
-      expect(transaction.value).to eq(-250)
-    end
-
-    it 'should log the date of the withdrawal' do
-      expect(transaction.date).to eq(Time.now.strftime("%d/%m/%Y"))
-    end
+  it 'should be initialized with an amount for the transaction' do
+    expect(transaction.amount).to eq(1000)
   end
 
 end
