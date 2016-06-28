@@ -22,18 +22,11 @@ class User
   end
 
   def print_statement
-    string = ''
+    string = STATEMENT_HEADER
     @history.each do |transaction|
-      if transaction[:amount] < 0
-        pre_pipes = ' || || '
-        post_pipes = ' || '
-      else
-        pre_pipes = ' || '
-        post_pipes = ' || || '
-      end
-      string += "#{transaction[:date]}" + pre_pipes + "#{transaction[:amount].abs}" + post_pipes + "#{transaction[:balance]}\n"
+      string += string_constructer(transaction)
     end
-    return (STATEMENT_HEADER + string).chomp
+    return string.chomp
   end
 
   private
@@ -41,6 +34,14 @@ class User
   def update_account(transaction)
     @balance += transaction.amount
     @history.push({date: transaction.date, amount: transaction.amount, balance: @balance})
+  end
+
+  def string_constructer(transaction)
+    date = "#{transaction[:date]}"
+    amount = " || || #{transaction[:amount].abs} || "
+    amount = " || #{transaction[:amount].abs} || || " if transaction[:amount] >= 0
+    current_balance = "#{transaction[:balance]}\n"
+    return (date + amount + current_balance)
   end
 
 end
