@@ -46,7 +46,7 @@ describe User do
   describe 'print statement' do
     it 'should output users account history in the correct format' do
       user.deposit(100)
-      expect(user.print_statement).to eq(("date || credit || debit || balance"+ "\n" + "28/06/2016 || 100 || || 100"))
+      expect(user.print_statement).to eq(("date || credit || debit || balance"+ "\n" + Time.now.strftime("%d/%m/%Y") + " || 100 || || 100"))
     end
   end
 
