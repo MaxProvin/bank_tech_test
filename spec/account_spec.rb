@@ -12,4 +12,20 @@ describe Account do
 		expect(account.balance).to eq 0
 	end
 
+	context 'Transaction: ' do
+		before do
+			account.deposit(100)
+		end
+
+		it 'Deposit is succesful' do
+			expect(account.balance).to eq 100
+		end
+
+		it 'Multiple deposits add to the total balance' do
+			account.deposit(50)
+			expect(account.balance).not_to eq 50
+			expect(account.balance).to eq 150
+		end
+	end
+
 end

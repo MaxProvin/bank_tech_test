@@ -9,4 +9,8 @@ class Account
 		@balance = INITIAL_BALANCE
 	end
 
+	def deposit(amount)
+		@balance += amount
+	end
+
 end
