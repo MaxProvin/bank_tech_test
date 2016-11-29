@@ -26,6 +26,11 @@ describe Account do
 			expect(account.balance).not_to eq 50
 			expect(account.balance).to eq 150
 		end
+
+		it 'Withdrawal is succesful' do
+			account.withdraw(50)
+			expect(account.balance).to eq 50
+		end
 	end
 
 end
