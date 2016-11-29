@@ -1,3 +1,5 @@
+require 'date'
+
 class Statement
 
 	HEADER = "date       || credit || debit   || balance\n"

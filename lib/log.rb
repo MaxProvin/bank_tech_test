@@ -1,3 +1,5 @@
+require 'date'
+
 class Log
 
 	attr_reader :display
