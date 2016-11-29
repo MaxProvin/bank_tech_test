@@ -1,17 +1,18 @@
 class Statement
 
-	attr_reader :date, :credit, :debit, :balance
+	HEADER = "date       || credit || debit   || balance"
 
-	def initialize(date, transfer, balance)
-		@date = date
-		@credit = transfer if transfer > 0
-		@debit = -transfer if transfer < 0
-		@balance = balance
+	attr_reader :information
+
+	def initialize(transaction_log)
+		@information = transaction_log
 	end
 
 	def print
-		formatted_date = date.strftime("%d/%m/%Y")
-		
+		information.each do |log|
+			date = "#{log['date']} ||"
+			credit = "#{log['credit']}"
+		end
 	end
 
 end
