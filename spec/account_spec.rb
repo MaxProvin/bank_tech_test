@@ -47,12 +47,4 @@ describe Account do
 			expect(account.transactions).to eq sample_transaction
 		end
 	end
-
-	context 'Statement: ' do
-		xit 'Each transaction has the date it was made' do
-			account.deposit(100)
-			expect(account.transactions['date'])
-		end
-	end
-
 end
