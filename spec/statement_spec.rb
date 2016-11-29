@@ -16,9 +16,9 @@ describe Statement do
 		end
 	end
 
-	describe ':format' do
+	describe ':print' do
 		it 'returns a statement in correct format' do
-			expect(statement.format).to eq sample_output
+			expect {statement.print }.to output(sample_output).to_stdout
 		end
 	end
 

@@ -4,7 +4,7 @@ describe Account do
 	
 	subject(:account) { described_class.new('Max', log) }
 	let(:log) { double :log, store: nil }
-
+	let(:statement) { double :statement, print: 'Pretty info'}
 	it 'Has an owner' do
 		expect(account.owner).to eq 'Max'
 	end
@@ -15,6 +15,10 @@ describe Account do
 
 	it 'Is initialized with a transactions log' do
 		expect(account.transactions).to eq log
+	end
+
+	it 'Can print a statement' do
+		expect(account.print_statement(statement)).to eq 'Pretty info'
 	end
 
 	context 'Transactions: ' do

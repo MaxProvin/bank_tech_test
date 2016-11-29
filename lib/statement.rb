@@ -10,7 +10,7 @@ class Statement
 		@information = transaction_log.display
 	end
 
-	def format
+	def print
 		string = ""
 		information.reverse.each do |log|
 			date = log[:date].strftime("%d/%m/%Y") + ' '
@@ -18,8 +18,10 @@ class Statement
 			balance = '%.2f' % log[:balance].to_f
 			string += (date + credit_debit_string(transaction) + balance + "\n")
 		end
-		HEADER + string
+		puts (HEADER + string)
 	end
+
+	private
 
 	def credit_debit_string(transaction)
 		if transaction > 0

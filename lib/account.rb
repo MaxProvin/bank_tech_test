@@ -20,4 +20,9 @@ class Account
 		transactions.store(DateTime.now, -amount, balance)
 	end
 
+	def print_statement(statement = Statement.new(transactions))
+		statement.print
+	end
+
+
 end
