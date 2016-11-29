@@ -14,12 +14,9 @@ class Statement
 		information.each do |log|
 			date = "#{log[:date]}"
 			sum = log[:transaction]
-			sum > 0 ? c = "|| #{sum} ||" : d = EMPTY
-			sum > 0 ? c = EMPTY : d = "|| #{sum.abs} ||"
-			balance = "|| #{log[:balance]} ||"
-			string += (date + c + d + balance)
+		
+			balance = "#{log[:balance]}"
+			string += date + c + d
 		end
-		string
 	end
-
 end
