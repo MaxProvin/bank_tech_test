@@ -1,9 +1,12 @@
 class Account
 
-	attr_reader :owner
+	INITIAL_BALANCE = 0
 
-	def initialize(owner: owner)
+	attr_reader :owner, :balance
+
+	def initialize(owner)
 		@owner = owner
+		@balance = INITIAL_BALANCE
 	end
 
 end
