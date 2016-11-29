@@ -7,8 +7,8 @@ describe Statement do
 	let(:date) { DateTime.new(2016, 1, 25) }
 	let(:sample_output) { File.read('sample_statement.txt') }
 	let(:log_obj) { double :log_obj, display: [log1, log2] }
-	let(:log1) { {date: date, transaction: 10, balance: 10} }
-	let(:log2) { {date: date, transaction: -5, balance: 5} }
+	let(:log1) { {date: date, transaction: 2000, balance: 3000} }
+	let(:log2) { {date: date, transaction: -500, balance: 2500} }
 
 	context 'Initialization: ' do
 		it 'Is supplied an array of logs' do
@@ -16,8 +16,8 @@ describe Statement do
 		end
 	end
 
-	describe ':print' do
-		it 'outputs a statement in corrent format' do
+	describe ':format' do
+		it 'returns a statement in correct format' do
 			expect(statement.format).to eq sample_output
 		end
 	end
