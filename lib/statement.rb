@@ -9,4 +9,9 @@ class Statement
 		@balance = balance
 	end
 
+	def print
+		formatted_date = date.strftime("%d/%m/%Y")
+		
+	end
+
 end

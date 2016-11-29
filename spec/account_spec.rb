@@ -2,16 +2,8 @@ require 'account'
 
 describe Account do
 	
-	subject(:account) { described_class.new('Max') }
-	let(:sample_transaction) {[{
-		date: DateTime.new(2016, 1, 15),
-		transaction: 100,
-		balance: 100
-		}, {
-		date: DateTime.new(2016, 1, 15),
-		transaction: -50,
-		balance: 50			
-		}]}
+	subject(:account) { described_class.new('Max', log) }
+	let(:log) { double :log, store: nil }
 
 	it 'Has an owner' do
 		expect(account.owner).to eq 'Max'
@@ -19,6 +11,10 @@ describe Account do
 
 	it 'Has a balance, with an initial value of 0'do
 		expect(account.balance).to eq 0
+	end
+
+	it 'Is initialized with a transactions log' do
+		expect(account.transactions).to eq log
 	end
 
 	context 'Transactions: ' do
@@ -40,11 +36,6 @@ describe Account do
 		it 'Withdrawal is succesful' do
 			account.withdraw(50)
 			expect(account.balance).to eq 50
-		end
-
-		it 'Are Logged with date, transaction and balance' do
-			account.withdraw(50)
-			expect(account.transactions).to eq sample_transaction
 		end
 	end
 end

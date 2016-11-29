@@ -4,28 +4,20 @@ class Account
 
 	attr_reader :owner, :balance, :transactions
 
-	def initialize(owner)
+	def initialize(owner, log = Log.new)
 		@owner = owner
 		@balance = INITIAL_BALANCE
-		@transactions = []
+		@transactions = log
 	end
 
 	def deposit(amount)
 		@balance += amount
-		transactions.push({
-			date: DateTime.now,
-			transaction: amount,
-			balance: balance
-			})
+		transactions.store(DateTime.now, amount, balance)
 	end
 
 	def withdraw(amount)
 		@balance -= amount
-		transactions.push({
-			date: DateTime.now,
-			transaction: -amount,
-			balance: balance
-			})
+		transactions.store(DateTime.now, -amount, balance)
 	end
 
 end

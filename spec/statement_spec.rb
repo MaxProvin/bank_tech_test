@@ -5,6 +5,7 @@ describe Statement do
 	subject(:statement) { described_class.new(date, 10, 100) }
 	subject(:statement2) { described_class.new(date, -10, 100) }
 	let(:date) { DateTime.new(2016, 1, 25) }
+	let(:sample_output) { File.read('sample_statement.txt') }
 
 	context 'Initialization: ' do
 		it 'Has a date in DateTime format' do
@@ -28,4 +29,11 @@ describe Statement do
 			end
 		end
 	end
+
+	describe ':print' do
+		it 'outputs a statement in corrent format' do
+			expect(statement.print).to eq sample_output
+		end
+	end
+
 end
