@@ -1,6 +1,7 @@
 class Statement
 
 	HEADER = "date       || credit || debit   || balance"
+	EMPTY = "        "
 
 	attr_reader :information
 
@@ -8,11 +9,17 @@ class Statement
 		@information = transaction_log
 	end
 
-	def print
+	def format
+		string = ""
 		information.each do |log|
-			date = "#{log['date']} ||"
-			credit = "#{log['credit']}"
+			date = "#{log[:date]}"
+			sum = log[:transaction]
+			sum > 0 ? c = "|| #{sum} ||" : d = EMPTY
+			sum > 0 ? c = EMPTY : d = "|| #{sum.abs} ||"
+			balance = "|| #{log[:balance]} ||"
+			string += (date + c + d + balance)
 		end
+		string
 	end
 
 end
