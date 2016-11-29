@@ -2,10 +2,11 @@ require 'statement'
 
 describe Statement do
 	
-	subject(:statement) { described_class.new([log1, log2]) }
+	subject(:statement) { described_class.new(log_obj) }
 
 	let(:date) { DateTime.new(2016, 1, 25) }
 	let(:sample_output) { File.read('sample_statement.txt') }
+	let(:log_obj) { double :log_obj, display: [log1, log2] }
 	let(:log1) { {date: date, transaction: 10, balance: 10} }
 	let(:log2) { {date: date, transaction: -5, balance: 5} }
 

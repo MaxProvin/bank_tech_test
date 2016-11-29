@@ -1,22 +1,26 @@
 class Statement
 
-	HEADER = "date       || credit || debit   || balance"
+	HEADER = "date       || credit || debit   || balance\n"
 	EMPTY = "        "
 
 	attr_reader :information
 
-	def initialize(transaction_log)
-		@information = transaction_log
+	def initialize(transaction_log = Log.new)
+		@information = transaction_log.display
 	end
 
 	def format
 		string = ""
 		information.each do |log|
-			date = "#{log[:date]}"
-			sum = log[:transaction]
-		
-			balance = "#{log[:balance]}"
-			string += date + c + d
+			date = "#{log[:date].strftime("%d/%m/%Y")} ||"
+			if log[:transaction] > 0
+				credit, debit = "#{log[:transaction]} ||", EMPTY
+			else
+				credit, debit = EMPTY, " #{log[:transaction]} ||"
+			end
+			balance = " #{log[:balance]} ||"
+			string += (date + credit + debit + balance + "\n")
 		end
+		puts HEADER + string
 	end
 end
